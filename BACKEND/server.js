@@ -16,18 +16,28 @@ const PORT = process.env.PORT || 8090;
 app.use(cors());
 app.use(bodyParser.json());
 
+// // Database connection
 // Database connection
 const URL = process.env.MONGODB_URL;
 
-mongoose.connect(URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("MongoDB Connection Success!"))
-.catch((err) => {
-  console.error("MongoDB connection error:", err.message);
-  process.exit(1);
-});
+mongoose.connect(URL)
+  .then(() => console.log("MongoDB Connection Success!"))
+  .catch((err) => {
+    console.error("MongoDB connection error:", err.message);
+    process.exit(1);
+  });
+
+// const URL = process.env.MONGODB_URL;
+
+// mongoose.connect(URL, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// })
+// .then(() => console.log("MongoDB Connection Success!"))
+// .catch((err) => {
+//   console.error("MongoDB connection error:", err.message);
+//   process.exit(1);
+// });
 
 // AKEEL
 const contactusRouter = require("./Routes/Cofee.js");
