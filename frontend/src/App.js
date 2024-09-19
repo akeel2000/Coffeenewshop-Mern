@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
+
 import './App.css';
 import Home from './Component/Home';
 import Header from './Component/Header';
@@ -13,8 +13,10 @@ import Footer from './Component/Footer';
 import { Toaster } from 'react-hot-toast';
 import All from './pages/All';
 import Order from './Component/order';
-import BookingForm from './Component/book';
+
 import Book from './Component/book';
+import LoginPage from './Component/Login';
+import SignupPage from './Component/Signup';
 
 
 function ScrollToTop() {
@@ -50,6 +52,10 @@ function App() {
         <Route path="/contact" element={<Contact/>} />
         <Route path="/order" element={<Order/>} />
         <Route path="/Booktable" element={<Book/>} />
+        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/signup" element={<SignupPage/>} />
+        /signup
+
 
       </Routes>
       <Toaster />

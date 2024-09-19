@@ -15,7 +15,7 @@ function Home() {
           <h2 className="text-2xl max-w-lg font-bold text-white mx-auto mb-4">Discover the Magic in Every Cup.</h2>
           <p className="max-w-lg mx-auto">Welcome to our coffee paradise, where every bean tells a story and every cup sparks joy.</p>
           <div className="mt-6 space-x-4">
-          <RouterLink to="/order" className="hover:bg-orange-700 px-3 py-2 rounded-full shadow-lg custom-button">Order Online</RouterLink>
+          <RouterLink to="/login" className="hover:bg-orange-700 px-3 py-2 rounded-full shadow-lg custom-button">Order Online</RouterLink>
 
             <RouterLink to="/Booktable" className="hover:bg-orange-700 px-3 py-2 rounded-full shadow-lg custom-button">Book A Table</RouterLink>
           </div>

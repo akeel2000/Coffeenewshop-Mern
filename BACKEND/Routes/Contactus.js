@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Contactus = require("../Models/Cofeemodel.js");
+const Contactus = require("../Models/Contactus");
 
 // Route to add a new contact
 router.route("/add").post((req, res) => {
