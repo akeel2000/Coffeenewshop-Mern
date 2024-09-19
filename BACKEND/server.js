@@ -40,11 +40,16 @@ mongoose.connect(URL)
 // });
 
 // AKEEL
-const contactusRouter = require("./Routes/Cofee.js");
+const contactusRouter = require("./Routes/Contactus.js");
 app.use("/contactus", contactusRouter);
 
 const booktableRouter = require("./Routes/book.js");
 app.use("/booktable", booktableRouter);
+
+const authRouter = require("./Routes/auth.js");
+app.use("/auth", authRouter);
+
+
 
 // Start server
 app.listen(PORT, () => {
