@@ -11,7 +11,6 @@ function SignupPage() {
   const navigate = useNavigate();
   const [success, setSuccess] = useState('');
 
-
   const handleSignup = async (e) => {
     e.preventDefault();
     setError('');
@@ -26,7 +25,6 @@ function SignupPage() {
       localStorage.setItem('token', response.data.token); // Save token to local storage
       setSuccess('Successfully signed up! Redirecting to login...');
 
-      // Step 1: Add a delay before navigating
       setTimeout(() => {
         navigate('/login'); // Redirect to login after signup
       }, 2000); // Wait for 2 seconds to show the success message
@@ -36,60 +34,63 @@ function SignupPage() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h1 className="text-2xl font-bold mb-4">Signup</h1>
+    <div className="flex items-start justify-center h-screen bg-customColor pt-36"> {/* Added pt-12 for spacing from the top */}
+      <div className="bg-gradient-to-br from-gray-900 via-gray-700 to-gray-600 backdrop-blur-md p-10 rounded-xl shadow-xl w-full max-w-md h-auto flex flex-col justify-center">
+        <h1 className="text-3xl font-light mb-6 text-white">Signup</h1>
         {error && <p className="text-red-500">{error}</p>}
-          {/* Step 2: Display success message */}
-          {success && <p className="text-green-500">{success}</p>}
+        {success && <p className="text-green-500">{success}</p>}
         <form onSubmit={handleSignup}>
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-1" htmlFor="name">
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-100 mb-2" htmlFor="name">
               Name
             </label>
             <input
               id="name"
               type="text"
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-2 text-gray-900 bg-gray-200 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+              placeholder="Enter your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-1" htmlFor="email">
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-100 mb-2" htmlFor="email">
               Email
             </label>
             <input
               id="email"
               type="email"
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-2 text-gray-900 bg-gray-200 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-1" htmlFor="password">
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-100 mb-2" htmlFor="password">
               Password
             </label>
             <input
               id="password"
               type="password"
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-2 text-gray-900 bg-gray-200 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-1" htmlFor="confirmPassword">
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-100 mb-2" htmlFor="confirmPassword">
               Confirm Password
             </label>
             <input
               id="confirmPassword"
               type="password"
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-2 text-gray-900 bg-gray-200 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
+              placeholder="Confirm your password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
@@ -97,7 +98,7 @@ function SignupPage() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+            className="w-full py-3 text-lg text-gray-800 bg-white rounded-lg hover:bg-gray-300 focus:outline-none"
           >
             Signup
           </button>

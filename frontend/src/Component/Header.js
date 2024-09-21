@@ -4,7 +4,7 @@ import { Link as ScrollLink } from 'react-scroll';
 import { FaSearch, FaShoppingCart } from 'react-icons/fa'; // FontAwesome icons
 import imgSrc from '../Component/ante-samarzija-lsmu0rUhUOk-unsplash.jpg';
 
-function Header() {
+function Header({ isAuthenticated, handleLogout }) {
   const location = useLocation();
   const [searchVisible, setSearchVisible] = useState(false);
 
@@ -52,7 +52,7 @@ function Header() {
           {renderLink('contact', 'Contact')}
         </nav>
 
-        {/* Right Side Icons: Search Bar, Cart, Login */}
+        {/* Right Side Icons: Search Bar, Cart, Login/Logout */}
         <div className="flex items-center space-x-4">
           {/* Search Bar */}
           <div
@@ -75,13 +75,22 @@ function Header() {
             <FaShoppingCart />
           </RouterLink>
 
-          {/* Login Button */}
-          <RouterLink
-            to="/login"
-            className="bg-orange-500 hover:bg-orange-700 text-white px-4 py-2 rounded-full shadow-lg cursor-pointer"
-          >
-            Login
-          </RouterLink>
+          {/* Conditional Login/Logout Button */}
+          {isAuthenticated ? (
+            <button
+              onClick={handleLogout}
+              className="bg-orange-500 hover:bg-orange-700 text-gray-100 px-6 py-3 rounded-lg shadow-md cursor-pointer"
+            >
+              Logout
+            </button>
+          ) : (
+            <RouterLink
+              to="/login"
+              className="bg-orange-500 hover:bg-orange-700 text-gray-100 px-6 py-3 rounded-lg shadow-md cursor-pointer"
+            >
+              Login
+            </RouterLink>
+          )}
         </div>
       </header>
     </div>

@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 8090;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/uploads', express.static('uploads'));
 
 // // Database connection
 // Database connection
@@ -49,7 +50,8 @@ app.use("/booktable", booktableRouter);
 const authRouter = require("./Routes/auth.js");
 app.use("/auth", authRouter);
 
-
+const productRouter= require("./Routes/product");
+app.use('/product', productRouter);
 
 // Start server
 app.listen(PORT, () => {
