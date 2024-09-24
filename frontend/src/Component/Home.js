@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import imgSrc from '../Component/OIP.jpeg'; // Ensure this path is correct
-import Header from '../Component/Header'; // If you're using a header
 
 function Home() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Default to false
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Default to false
   const navigate = useNavigate();
 
   // Check if the user is authenticated when the component mounts
   useEffect(() => {
     const token = localStorage.getItem('token'); // Check for token in local storage
     if (token) {
-      setIsAuthenticated(false);
+      setIsAuthenticated(true); // If token exists, the user is authenticated
+    } else {
+      setIsAuthenticated(false); // If no token, set it to false
     }
   }, []);
 
@@ -51,4 +52,5 @@ function Home() {
 }
 
 export default Home;
+
 

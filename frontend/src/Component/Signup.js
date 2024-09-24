@@ -16,6 +16,12 @@ function SignupPage() {
     setError('');
     setSuccess('');
 
+    // Check if all fields are filled
+    if (!name || !email || !password || !confirmPassword) {
+      setError('Please enter all fields');
+      return;
+    }
+
     // Validate password match
     if (password !== confirmPassword) {
       setError('Passwords do not match');
@@ -28,10 +34,11 @@ function SignupPage() {
         name,
         email,
         password,
-      });
-      localStorage.setItem('token', response.data.token);
-      setSuccess('Successfully signed up! Redirecting to login...');
+        confirmPassword, // Send all fields for validation
+      }, { withCredentials: true }); // Important for session handling
       
+      setSuccess('Successfully signed up! Redirecting to login...');
+
       // Redirect to login page after 2 seconds
       setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
@@ -47,9 +54,7 @@ function SignupPage() {
         {success && <p className="text-green-500">{success}</p>}
         <form onSubmit={handleSignup}>
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-100 mb-2" htmlFor="name">
-              Name
-            </label>
+            <label className="block text-sm font-medium text-gray-100 mb-2" htmlFor="name">Name</label>
             <input
               id="name"
               type="text"
@@ -61,9 +66,7 @@ function SignupPage() {
             />
           </div>
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-100 mb-2" htmlFor="email">
-              Email
-            </label>
+            <label className="block text-sm font-medium text-gray-100 mb-2" htmlFor="email">Email</label>
             <input
               id="email"
               type="email"
@@ -75,9 +78,7 @@ function SignupPage() {
             />
           </div>
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-100 mb-2" htmlFor="password">
-              Password
-            </label>
+            <label className="block text-sm font-medium text-gray-100 mb-2" htmlFor="password">Password</label>
             <input
               id="password"
               type="password"
@@ -89,9 +90,7 @@ function SignupPage() {
             />
           </div>
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-100 mb-2" htmlFor="confirmPassword">
-              Confirm Password
-            </label>
+            <label className="block text-sm font-medium text-gray-100 mb-2" htmlFor="confirmPassword">Confirm Password</label>
             <input
               id="confirmPassword"
               type="password"
