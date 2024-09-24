@@ -3,11 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux'; // Import Provider from react-redux
+import store from './redux/store'; // Import your Redux store
+import axios from 'axios'; // Import axios
+
+// Set Axios to send credentials (cookies) with every request
+axios.defaults.withCredentials = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}> {/* Wrap the app with Provider and pass the Redux store */}
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 

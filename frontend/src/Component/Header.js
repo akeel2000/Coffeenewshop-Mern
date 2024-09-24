@@ -1,13 +1,43 @@
-import React, { useState } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import { FaSearch, FaShoppingCart } from 'react-icons/fa'; // FontAwesome icons
+import axios from 'axios';
 import imgSrc from '../Component/ante-samarzija-lsmu0rUhUOk-unsplash.jpg';
 
-function Header({ isAuthenticated, handleLogout }) {
+function Header({ isAuthenticated, setIsAuthenticated }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const [searchVisible, setSearchVisible] = useState(false);
 
+  // Debugging log to check isAuthenticated state
+  console.log('isAuthenticated:', isAuthenticated);
+
+  useEffect(() => {
+    // Whenever the isAuthenticated state changes, force re-render
+    console.log('Header re-rendering due to authentication change');
+  }, [isAuthenticated]);
+
+  // Function to handle logout
+  const handleLogoutClick = async () => {
+    try {
+      // Logout request to backend
+      await axios.post('http://localhost:8090/auth/logout', {}, { withCredentials: true });
+
+      // Update state to reflect logout
+      setIsAuthenticated(false);
+
+      // Redirect to login page
+      navigate('/home');
+
+      // Optional: show a message after logout
+      alert('You have been logged out successfully.');
+    } catch (err) {
+      console.error('Logout failed:', err.response?.data?.message || err.message);
+    }
+  };
+
+  // Function to render links depending on location
   const renderLink = (to, label) => {
     if (location.pathname === '/') {
       return (
@@ -78,7 +108,7 @@ function Header({ isAuthenticated, handleLogout }) {
           {/* Conditional Login/Logout Button */}
           {isAuthenticated ? (
             <button
-              onClick={handleLogout}
+              onClick={handleLogoutClick}
               className="bg-orange-500 hover:bg-orange-700 text-gray-100 px-6 py-3 rounded-lg shadow-md cursor-pointer"
             >
               Logout
@@ -98,3 +128,7 @@ function Header({ isAuthenticated, handleLogout }) {
 }
 
 export default Header;
+
+
+
+

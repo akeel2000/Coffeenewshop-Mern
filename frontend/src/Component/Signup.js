@@ -8,33 +8,39 @@ function SignupPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
 
+    // Validate password match
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:8090/auth/signup', { name, email, password, confirmPassword });
-      localStorage.setItem('token', response.data.token); // Save token to local storage
+      // Send signup request to the backend
+      const response = await axios.post('http://localhost:8090/auth/signup', {
+        name,
+        email,
+        password,
+      });
+      localStorage.setItem('token', response.data.token);
       setSuccess('Successfully signed up! Redirecting to login...');
-
-      setTimeout(() => {
-        navigate('/login'); // Redirect to login after signup
-      }, 2000); // Wait for 2 seconds to show the success message
+      
+      // Redirect to login page after 2 seconds
+      setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
       setError(err.response?.data?.msg || 'Signup failed');
     }
   };
 
   return (
-    <div className="flex items-start justify-center h-screen bg-customColor pt-36"> {/* Added pt-12 for spacing from the top */}
+    <div className="flex items-start justify-center h-screen bg-customColor pt-36">
       <div className="bg-gradient-to-br from-gray-900 via-gray-700 to-gray-600 backdrop-blur-md p-10 rounded-xl shadow-xl w-full max-w-md h-auto flex flex-col justify-center">
         <h1 className="text-3xl font-light mb-6 text-white">Signup</h1>
         {error && <p className="text-red-500">{error}</p>}
